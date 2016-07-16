@@ -111,7 +111,61 @@ UUID=   /boot   ext4  rw,nosuid,nodev     0   2
 UUID=   none    swap  sw                  0   0
 ```
 ```bash
-apt install busybox cryptsetup dropbear grub-pc initramfs-tools linux-image-amd64 locales lvm2 ssh
+apt install busybox cryptsetup grub-pc initramfs-tools linux-image-amd64 locales lvm2 ssh
+```
+```bash
+apt install dropbear
+```
+```bash
+/usr/lib/dropbear/dropbearconvert openssh dropbear /etc/ssh/ssh_host_rsa_key /etc/initramfs-tools/etc/dropbear/dropbear_rsa_host_key
+```
+```bash
+/usr/lib/dropbear/dropbearconvert openssh dropbear /etc/ssh/ssh_host_dsa_key /etc/initramfs-tools/etc/dropbear/dropbear_dss_host_key
+```
+
+`nano /etc/initramfs-tools/hooks/unlock`
+```bash
+#!/bin/sh
+
+PREREQ=""
+prereqs()
+{
+  echo "$PREREQ"
+}
+case $1 in
+  prereqs)
+    prereqs
+    exit 0
+    ;;
+esac
+
+. /usr/share/initramfs-tools/hook-functions
+
+cat > "${DESTDIR}/root/unlock" << EOF
+#!/bin/sh
+/lib/cryptsetup/askpass 'Passphrase: ' > /lib/cryptsetup/passfifo
+EOF
+
+chmod u+x "${DESTDIR}/root/unlock"
+
+exit 0
+```
+```bash
+rm /etc/initramfs-tools/root/.ssh/id_rsa*
+```
+```bash
+echo "YOUR PUBLIC KEY" > /etc/initramfs-tools/root/.ssh/authorized_keys
+```
+
+`nano /etc/initramfs-tools/initramfs.conf`
+```bash
+DEVICE=eth0
+
+DROPBEAR=y
+CRYPTSETUP=y
+```
+```bash
+update-initramfs -u -k all
 ```
 ```bash
 passwd root
