@@ -1,6 +1,5 @@
 # Arch Linux installation with encrypted root, home and swap
 
-## Preparing the LiveISO
 ## Loading default keymap for Arch live system
 ```bash
 loadkeys de-latin1-nodeadkeys
