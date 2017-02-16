@@ -142,6 +142,10 @@ echo "KEYMAP=de-latin1-nodeadkeys" > /etc/vconsole.conf
 `/etc/mkinitcpio.conf`
 ```bash
 HOOKS=" ... keyboard block encrypt lvm2 filesystems ..."
+```
+
+#### Regenerate ramdisk
+```bash
 mkinitcpio -p linux
 ```
 
@@ -155,7 +159,13 @@ pacman -S grub
 pacman -S efibootmgr dosfstools
 ```
 
-#### Configure grub
+#### Configuring Grub
+##### Getting the UUID of the Luks device
+```bash
+cryptsetup luksDump /dev/sda3
+```
+
+##### Configuring kernel parameters
 `/etc/default/grub`
 ```bash
 GRUB_CMDLINE_LINUX_DEFAULT="cryptdevice=UUID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX:crypt0"
