@@ -135,7 +135,7 @@ LC_ALL=
 
 #### Set console keymap
 ```bash
-echo "KEYMAP=de-latin1-nodeadkeys"
+echo "KEYMAP=de-latin1-nodeadkeys" > /etc/vconsole.conf
 ```
 
 #### Add scripts to ramdisk
