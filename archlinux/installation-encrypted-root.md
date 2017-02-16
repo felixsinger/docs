@@ -150,7 +150,7 @@ mkinitcpio -p linux
 pacman -S grub
 ```
 
-##### ONLY if your are in efi boot mode
+##### ONLY if you are in efi boot mode
 ```bash
 pacman -S efibootmgr dosfstools
 ```
@@ -169,4 +169,43 @@ grub-install /dev/sda
 #### Generate Grub config
 ```bash
 grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+### Final steps
+#### Exit from chroot environment
+```bash
+exit
+```
+
+#### Unmounting all partitions
+##### ONLY if you are in efi boot mode
+```bash
+umount /mnt/boot/efi
+```
+
+##### Legacy and efi
+```bash
+umount /mnt/boot
+umount /mnt/home
+umount /mnt
+```
+
+#### Deactivating swap
+```bash
+swapoff -a
+```
+
+#### Deactivating volume group
+```bash
+vgchange -an
+```
+
+#### Closing Luks device
+```bash
+cryptsetup luksClose crypt0
+```
+
+#### Ready & reboot :)
+```bash
+reboot
 ```
