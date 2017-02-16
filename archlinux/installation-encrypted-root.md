@@ -1,5 +1,10 @@
 # Arch Linux installation with encrypted root, home and swap
 
+## Preparing the LiveISO
+```bash
+loadkeys de-latin1-nodeadkeys
+```
+
 ## Preparing the hard disk
 ### Creating the partition layout
 ```bash
@@ -24,6 +29,7 @@ set 1 boot on
 ### Legacy bios and efi
 ```bash
 mkpart logical 2GB 100%
+quit
 ```
 
 ## Preparing the encrypted system partitions
@@ -51,17 +57,17 @@ mkfs.vfat -F 32 -v -n EFIBOOT /dev/sda1
 #### Legacy and EFI mode
 ```bash
 mkfs.ext4 -L boot /dev/sda2
-mkfs.ext4 -L root /dev/mapper/crypt0-vg0-root
-mkfs.ext4 -L home /dev/mapper/crypt0-vg0-home
-mkswap -L swap /dev/mapper/crypt0-vg0-swap
+mkfs.ext4 -L root /dev/mapper/crypt0--vg0-root
+mkfs.ext4 -L home /dev/mapper/crypt0--vg0-home
+mkswap -L swap /dev/mapper/crypt0--vg0-swap
 ```
 
 ### Mount partitions
 ```bash
-mount -t ext4 /dev/mapper/crypt0-vg0-root /mnt
+mount -t ext4 /dev/mapper/crypt0--vg0-root /mnt
 mkdir /mnt/boot && mount -t ext4 /dev/sda2 /mnt/boot
-mkdir /mnt/home && mount -t ext4 /dev/mapper/crypt0-vg0-home /mnt/home
-swapon /dev/mapper/crypt0-vg0-swap
+mkdir /mnt/home && mount -t ext4 /dev/mapper/crypt0--vg0-home /mnt/home
+swapon /dev/mapper/crypt0--vg0-swap
 ```
 
 #### ONLY if you are in efi bios mode
@@ -88,7 +94,7 @@ arch-chroot /mnt /bin/bash
 
 #### Update mirror list
 ```bash
-curl "https://www.archlinux.org/mirrorlist/?country=FI&country=DE&country=IS&country=LU&country=NL&country=NZ&country=CH&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on" | sed 's/#Server/Server' > /etc/pacman.d/mirrorlist
+curl "https://www.archlinux.org/mirrorlist/?country=FI&country=DE&country=IS&country=LU&country=NL&country=NZ&country=CH&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on" | sed 's/#Server/Server/g' > /etc/pacman.d/mirrorlist
 pacman -Syu
 ```
 
@@ -104,8 +110,8 @@ ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
 #### Generate locales
 ```bash
-sed -ie 's/#de_DE/de_DE/g'
-sed -ie 's/#en_US/en_US/g'
+sed -ie 's/#de_DE/de_DE/g' /etc/locale.gen
+sed -ie 's/#en_US/en_US/g' /etc/locale.gen
 locale-gen
 ```
 
