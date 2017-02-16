@@ -1,5 +1,10 @@
 # Arch Linux installation with encrypted root, home and swap
 
+## Loading default keymap for Arch live system
+```bash
+loadkeys de-latin1-nodeadkeys
+```
+
 ## Preparing the hard disk
 ### Creating the partition layout
 ```bash
