@@ -66,7 +66,7 @@ swapon /dev/mapper/crypt0-vg0-swap
 
 #### ONLY if you are in efi bios mode
 ```bash
-mkdir /mnt/boot/efi && mount -t ext4 /dev/sda1 /mnt/boot/efi
+mkdir /mnt/boot/efi && mount /dev/sda1 /mnt/boot/efi
 ```
 
 ## Installing & configuring Arch Linux
