@@ -1,6 +1,7 @@
 # Arch Linux installation with encrypted root, home and swap
 
 ## Preparing the LiveISO
+## Loading default keymap for Arch live system
 ```bash
 loadkeys de-latin1-nodeadkeys
 ```
@@ -143,6 +144,10 @@ echo "KEYMAP=de-latin1-nodeadkeys" > /etc/vconsole.conf
 `/etc/mkinitcpio.conf`
 ```bash
 HOOKS=" ... keyboard block encrypt lvm2 filesystems ..."
+```
+
+#### Regenerate ramdisk
+```bash
 mkinitcpio -p linux
 ```
 
@@ -151,12 +156,18 @@ mkinitcpio -p linux
 pacman -S grub
 ```
 
-##### ONLY if your are in efi boot mode
+##### ONLY if you are in efi boot mode
 ```bash
 pacman -S efibootmgr dosfstools
 ```
 
-#### Configure grub
+#### Configuring Grub
+##### Getting the UUID of the Luks device
+```bash
+cryptsetup luksDump /dev/sda3
+```
+
+##### Configuring kernel parameters
 `/etc/default/grub`
 ```bash
 GRUB_CMDLINE_LINUX_DEFAULT="cryptdevice=UUID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX:crypt0"
@@ -170,4 +181,43 @@ grub-install /dev/sda
 #### Generate Grub config
 ```bash
 grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+### Final steps
+#### Exit from chroot environment
+```bash
+exit
+```
+
+#### Unmounting all partitions
+##### ONLY if you are in efi boot mode
+```bash
+umount /mnt/boot/efi
+```
+
+##### Legacy and efi
+```bash
+umount /mnt/boot
+umount /mnt/home
+umount /mnt
+```
+
+#### Deactivating swap
+```bash
+swapoff -a
+```
+
+#### Deactivating volume group
+```bash
+vgchange -an
+```
+
+#### Closing Luks device
+```bash
+cryptsetup luksClose crypt0
+```
+
+#### Ready & reboot :)
+```bash
+reboot
 ```
