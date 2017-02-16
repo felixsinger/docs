@@ -46,6 +46,10 @@ lvcreate -l 100%FREE -n home crypt0-vg0
 #### ONLY if you are in efi bios mode
 ```bash
 mkfs.vfat -F 32 -v -n EFIBOOT /dev/sda1
+```
+
+#### Legacy and EFI mode
+```bash
 mkfs.ext4 -L boot /dev/sda2
 mkfs.ext4 -L root /dev/mapper/crypt0-vg0-root
 mkfs.ext4 -L home /dev/mapper/crypt0-vg0-home
