@@ -9,5 +9,9 @@ exec startxfce4
 ```
 
 ```bash
-pacman -S thunderbird firefox vlc libdvdcss pulseaudio pulseaudio-alsa pavucontrol networkmanager networkmanager-openconnect networkmanager-openvpn nm-connection-editor gvfs gvfs-smb gvfs-mtp gvfs-afc libreoffice-fresh simple-scan evince cups cups-pdf ttf-dejavu ttf-freefont ttf-liberation ttf‑linux‑libertine dosfstools ntfs-3g adwaita-icon-theme gnome-icon-theme gnome-icon-theme-extras arc-icon-theme deepin-icon-theme elementary-icon-theme human-icon-theme arc-gtk-theme numix-themes
+pacman -S thunderbird firefox vlc libdvdcss pulseaudio pulseaudio-alsa pavucontrol networkmanager networkmanager-openconnect networkmanager-openvpn nm-connection-editor gvfs gvfs-smb gvfs-mtp gvfs-afc libreoffice-fresh simple-scan evince cups cups-pdf ttf-dejavu ttf-freefont ttf-liberation ttf‑linux‑libertine dosfstools ntfs-3g
+```
+
+```bash
+pacman -S adwaita-icon-theme gnome-icon-theme gnome-icon-theme-extras arc-icon-theme deepin-icon-theme elementary-icon-theme human-icon-theme arc-gtk-theme numix-themes
 ```
