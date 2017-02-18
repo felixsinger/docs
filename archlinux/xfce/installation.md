@@ -16,3 +16,7 @@ pacman -S thunderbird firefox vlc libdvdcss pulseaudio pulseaudio-alsa pavucontr
 ```bash
 pacman -S adwaita-icon-theme gnome-icon-theme gnome-icon-theme-extras arc-icon-theme deepin-icon-theme elementary-icon-theme human-icon-theme arc-gtk-theme numix-themes
 ```
+
+```bash
+thunar-archive-plugin xfce4-notifyd xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin
+```
