@@ -10,7 +10,7 @@ exec startxfce4
 ```
 
 ```bash
-pacman -S thunderbird firefox vlc libdvdcss pulseaudio pulseaudio-alsa pavucontrol networkmanager networkmanager-openconnect networkmanager-openvpn nm-connection-editor gvfs gvfs-smb gvfs-mtp gvfs-afc gimp libreoffice-fresh simple-scan evince cups cups-pdf gtk3-print-backends ttf-dejavu ttf-freefont ttf-liberation ttf‑linux‑libertine dosfstools ntfs-3g
+pacman -S thunderbird firefox vlc libdvdcss pulseaudio pulseaudio-alsa pavucontrol networkmanager networkmanager-openconnect networkmanager-openvpn nm-connection-editor gvfs gvfs-smb gvfs-mtp gvfs-afc gimp libreoffice-fresh simple-scan evince cups cups-pdf gtk3-print-backends ttf-dejavu ttf-freefont ttf-liberation ttf‑linux‑libertine
 ```
 
 ```bash
