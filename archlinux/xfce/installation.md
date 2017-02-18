@@ -5,6 +5,7 @@ pacman -S xfce4
 
 `/home/user/.xinitrc`
 ```bash
+start-pulseaudio-x11
 exec startxfce4
 ```
 
