@@ -1,5 +1,4 @@
 ## Install Xfce4
-![xfce4 Desktop](xfce.png)
 ```bash
 pacman -S xfce4
 ```
